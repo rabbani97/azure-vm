@@ -1,0 +1,17 @@
+# Ignore everything
+*
+
+# But not these files...
+!*.tf
+!README.md
+!.gitignore
+
+# Except these specific files
+!.terraform/
+!terraform.tfstate
+!terraform.tfstate.backup
+!.terraform.lock.hcl
+!*.pem
+!*.key
+!*.pub
+!.DS_Store 
