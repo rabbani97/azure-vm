@@ -2,6 +2,35 @@
 
 This project sets up a complete Azure VM infrastructure using Terraform, including networking, security, and VM configuration.
 
+## Architecture Diagram
+
+```mermaid
+graph TD
+    subgraph Azure["Azure Cloud"]
+        RG[Resource Group]
+        VNet[Virtual Network<br/>10.0.0.0/16]
+        Subnet1[Subnet 1<br/>10.0.1.0/24]
+        Subnet2[Subnet 2<br/>10.0.2.0/24]
+        VM[Linux VM<br/>Standard_B1s]
+        NIC[Network Interface]
+        PIP[Public IP]
+        NSG[Network Security Group]
+        RT[Route Table]
+
+        RG --> VNet
+        VNet --> Subnet1
+        VNet --> Subnet2
+        Subnet1 --> NIC
+        NIC --> VM
+        NIC --> PIP
+        NIC --> NSG
+        Subnet1 --> RT
+    end
+
+    Internet[Internet] --> PIP
+    NSG -->|Allow SSH Port 22| Internet
+```
+
 ## Infrastructure Components
 
 ### Virtual Machine
@@ -36,7 +65,7 @@ This project sets up a complete Azure VM infrastructure using Terraform, includi
 
 2. **Route Table**
    - Name: dev-demo-route-table
-   - Default route: 0.0.0.0/0 → Internet (1.1.1.1)
+   - Default route: 0.0.0.0/0 → Internet
 
 ## Prerequisites
 
